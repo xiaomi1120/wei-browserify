@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input{width: 50px;}
+    </style>
+</head>
+<body>
+<form action="">
+    <p>
+        <input type="text" id="x" value="2">*<input type="text" id="y" value="3">=<span id="result"></span>
+    </p>
+    <input type="button" onclick="add()" value="M1">
+    <input type="button" onclick="add2()" value="M1">
+    <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="bundle.js"></script>
+    <script>
+        function add(){
+            var x=parseInt($("#x").val());
+            console.log(x)
+            var y=parseInt($('#y').val());
+            console.log(y)
+            console.log(x*y)
+            $('#result').text(x*y);
+        }
+        var m=require('/multiplay.js');
+        function add2(){
+            var x=parseInt($("#x").val());
+            console.log(x)
+            var y=parseInt($('#y').val());
+            console.log(y)
+            $('#result').text(m(x,y));
+        }
+    </script>
+</form>
+</body>
+</html>
