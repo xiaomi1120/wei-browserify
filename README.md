@@ -12,22 +12,26 @@ Browserify 跑在浏览器上的Node程序
 
 ~ vi multiply.js
 
-module.exports = function (a, b) {
-    console.log("js:multiply");
-    return a * b;
-};
+`module.exports = function (a, b)
+{
+     console.log("js:multiply");
+     return a * b;
+ };
+ `
 
 新建文件：square.js
 
 
 ~ vi square.js
 
-var multiply = require('./multiply');
-module.exports = function (n) {
-    console.log("js:square");
-    return multiply(n, n);
-};
 
+
+`var multiply = require('./multiply');
+ module.exports = function (n) {
+     console.log("js:square");
+     return multiply(n, n);
+ };
+`
 新建文件：index.js
 
 
@@ -53,18 +57,19 @@ js:multiply
 
 新建文件：index.html
 
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Browserify</title>
+    <style>input{width:50px;}</style>
+    </head>
+    <body>
+    <h1>Browserify</h1>
+    <script src="bundle.js"></script>
+    </body>
+    </html>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Browserify</title>
-<style>input{width:50px;}</style>
-</head>
-<body>
-<h1>Browserify</h1>
-<script src="bundle.js"></script>
-</body>
-</html>
+
 
 在index.html中，我们加载刚才生成的bundle.js文件。
 
@@ -93,41 +98,41 @@ module.exports = function (a, b) {
 
 新建文件：module.html
 
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Browserify</title>
+    <style>input{width:50px;}</style>
+    </head>
+    <body>
+    <form>
+    <p>
+    <input type="text" id="x" value="2"/> * <input type="text" id="y" value="3" /> = <span id="result"></span>
+    </p>
+    <input type="button" onclick="add()" value="M1"/>
+    <input type="button" onclick="add2()" value="M2"/>
+    </form>
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bundle.js"></script>
+    <script>
+    function add(){
+    var x = parseInt($('#x').val());
+    var y = parseInt($('#y').val());
+    console.log(x*y);
+    $('#result').text(x*y);
+    }
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Browserify</title>
-<style>input{width:50px;}</style>
-</head>
-<body>
-<form>
-<p>
-<input type="text" id="x" value="2"/> * <input type="text" id="y" value="3" /> = <span id="result"></span>
-</p>
-<input type="button" onclick="add()" value="M1"/>
-<input type="button" onclick="add2()" value="M2"/>
-</form>
-<script src="bower_components/jquery/jquery.min.js"></script>
-<script src="bundle.js"></script>
-<script>
-function add(){
-var x = parseInt($('#x').val());
-var y = parseInt($('#y').val());
-console.log(x*y);
-$('#result').text(x*y);
-}
+    var m = require('./multiply.js');
+    function add2(){
+    var x = parseInt($('#x').val());
+    var y = parseInt($('#y').val());
+    console.log(m);
+    console.log(x*y);
+    $('#result').text(m(x,y));
+    }
+    </script>
+    </body>
+    </html>
 
-var m = require('./multiply.js');
-function add2(){
-var x = parseInt($('#x').val());
-var y = parseInt($('#y').val());
-console.log(m);
-console.log(x*y);
-$('#result').text(m(x,y));
-}
-</script>
-</body>
-</html>
 
 在浏览器中打开：
